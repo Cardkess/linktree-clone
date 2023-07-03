@@ -14,4 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-console.log(PORT);
+
+// creating server and logging to console
+app.listen(PORT, () => console.log(`It's alive on http://localhost:${PORT}`));
