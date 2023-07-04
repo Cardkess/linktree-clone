@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 
@@ -10,7 +9,6 @@ import RootLayout from "./layouts/RootLayout";
 import {
   createBrowserRouter,
   Route,
-  NavLink,
   createRoutesFromElements,
   RouterProvider
 } from 'react-router-dom';
