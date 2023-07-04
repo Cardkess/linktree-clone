@@ -1,9 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
 
+
+// importing pages/screens
+import Home from "./pages/Home";
+
+import RootLayout from "./layouts/RootLayout";
+
 import {
   createBrowserRouter,
-  Routes,
   Route,
   NavLink,
   createRoutesFromElements,
@@ -12,17 +17,15 @@ import {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Routes>
-      <Route index element={}/>
-    </Routes>
+    <Route path="/" element={<RootLayout/>}>
+      <Route index element={<Home/>}/>
+    </Route>
   )
 )
 
 function App() {
   return (
-    <div className="App">
       <RouterProvider router={router} />
-    </div>
   );
 }
 
