@@ -1,9 +1,17 @@
 // Importing Express and create an instance of the Express
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 
 // Load .env variables
 require("dotenv").config({ path: __dirname + '/./.env' });
+const userRoutes = require('./routes/users');
+
+// Connect to the MongoDB database
+mongoose.connect('mongodb://127.0.0.1:27017/linktree-clone', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const PORT = process.env.APP_PORT;
 
@@ -14,6 +22,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+// Use the user routes
+app.use('/api', userRoutes);
 
-// creating server and logging to console
-app.listen(PORT, () => console.log(`It's alive on http://localhost:${PORT}`));
+// Check the MongoDB connection
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB database');
+  // creating server and logging to console
+  app.listen(PORT, () => console.log(`It's alive on http://localhost:${PORT}`));
+});
+
+
+
+
