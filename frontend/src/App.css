@@ -37,10 +37,6 @@
   justify-content: center;
 }
 
-.menu-toggle p {
-  margin-top: 8px;
-  font-size: 22px;
-}
 
 .logo {
   width: 96px;
@@ -267,4 +263,9 @@ main {
 .login-divider{
   margin-bottom: 20px;
   border-color: #ea57325d;
+}
+
+.back-arrow{
+  font-size: 30px;
+  color: #ea5732;
 }
