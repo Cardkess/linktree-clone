@@ -109,7 +109,7 @@ main {
   font-weight: 700;
 }
 
-.item-share-icon{
+.item-share-icon {
   font-size: 23px;
   position: absolute;
   right: 18px;
@@ -121,8 +121,8 @@ main {
   visibility: visible;
 }
 
-.model-container{
-  position:absolute;
+.model-container {
+  position: absolute;
   top: 0;
   left: 0;
   height: 100vh;
@@ -130,7 +130,7 @@ main {
   background-color: rgba(19, 20, 20, 0.607);
   z-index: 100;
 }
-.popup-model{
+.popup-model {
   position: absolute;
   min-height: 400px;
   width: 19.8%;
@@ -146,28 +146,27 @@ main {
   border-radius: 15px;
 }
 
-.popup-model header h4{
+.popup-model header h4 {
   margin-top: 25px;
   margin-bottom: 5px;
   user-select: none;
 }
 
-.popup-model header span{
+.popup-model header span {
   user-select: none;
 }
 
-.popup-model hr{
+.popup-model hr {
   border-color: rgba(219, 219, 216, 0.253);
 }
 
-.popup-model-links{
- display: flex;
- flex-direction: column;
- padding: 10px 15px;
+.popup-model-links {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
 }
 
-.popup-nav-link{
-  
+.popup-nav-link {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 35px;
@@ -185,7 +184,7 @@ main {
   border: 1px solid rgba(186, 186, 184, 0.897);
 }
 
-.popup-close-icon{
+.popup-close-icon {
   position: absolute;
   right: 20px;
   font-size: 18px;
@@ -194,7 +193,7 @@ main {
   border-radius: 8px;
 }
 
-.popup-close-icon:hover{
+.popup-close-icon:hover {
   background-color: rgba(173, 173, 170, 0.194);
 }
 
@@ -204,4 +203,49 @@ main {
 
 .hidden {
   display: none;
+}
+
+.body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  min-width: 450px;
+  padding: 20px;
+  border: 1px solid #ea5732;
+  border-radius: 8px;
+  font-size: 24px;
+}
+
+.form-group p {
+  max-width: 450px;
+  text-align: center;
+}
+
+.signup-submit-btn {
+  color: white;
+  border: 1px solid rgba(225, 225, 225, 0.757);
+  cursor: pointer;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 35px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #ea5732;
+  width: 100%;
 }
