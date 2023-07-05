@@ -47,7 +47,7 @@ export const singupAction = async ({ request }) => {
   // TODO: implement signup logic here...
   const data = await request.formData();
 
-  const url = process.env.REACT_APP_BACKEND_API_URL + "/users";
+  const url = process.env.REACT_APP_BACKEND_API_URL + "/auth/signup";
 
   const submition = {
     name: data.get("name"),
