@@ -11,19 +11,19 @@ export default function Signup() {
       <div className="body-container">
         <h1>Create your account</h1>
         <Form>
-          <div class="form-group">
-            <label for="name">Name:</label>
+          <div className="form-group">
+            <label>Name:</label>
             <input type="text" id="name" name="name" required />
           </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
+          <div className="form-group">
+            <label>Email:</label>
             <input type="email" id="email" name="email" required />
           </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
+          <div className="form-group">
+            <label>Password:</label>
             <input type="password" id="password" name="password" required />
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <p>
               By clicking Create account, you agree to Linktree's Terms and
               Conditions and confirm you have read our Privacy Notice. You may

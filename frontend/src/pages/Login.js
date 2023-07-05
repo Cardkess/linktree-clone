@@ -11,12 +11,12 @@ export default function login() {
       <div className="body-container">
         <h1>Sign in</h1>
         <Form>
-          <div class="form-group">
-            <label for="email">Email:</label>
+          <div className="form-group">
+            <label>Email:</label>
             <input type="email" id="email" name="email" required />
           </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
+          <div className="form-group">
+            <label>Password:</label>
             <input type="password" id="password" name="password" required />
           </div>
           <hr className="login-divider"/>
