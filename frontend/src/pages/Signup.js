@@ -1,7 +1,9 @@
 import logo from "../tappa.png";
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 
 export default function Signup() {
+  const data = useActionData();
+
   return (
     <div>
       <div className="logo-container">
@@ -10,7 +12,8 @@ export default function Signup() {
 
       <div className="body-container">
         <h1>Create your account</h1>
-        <Form>
+
+        <Form method="post" action="/signup">
           <div className="form-group">
             <label>Name:</label>
             <input type="text" id="name" name="name" required />
@@ -33,7 +36,52 @@ export default function Signup() {
 
           <button className="signup-submit-btn">Submit</button>
         </Form>
+
+        {data && data.error && <span>{data.error}</span>}
       </div>
     </div>
   );
 }
+
+export const singupAction = async ({ request }) => {
+  // TODO: implement signup logic here...
+  const data = await request.formData();
+
+  const url = process.env.REACT_APP_BACKEND_API_URL + "/users";
+
+  const submition = {
+    name: data.get("name"),
+    email: data.get("email"),
+    password: data.get("password"),
+  };
+
+  if (submition.password.length < 8) {
+    return { error: "Password must be 8 characters or long." };
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submition),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+    
+      if (data.code === '201'){
+        return { error: 'User created successfuly.' };
+      }
+
+      return { error: data.error };
+
+    } else {
+      throw new Error(response.statusText);
+    }
+  } catch (error) {
+
+    return { error: error.message };
+  }
+};
