@@ -1,4 +1,5 @@
 import NavItem from "../components/NavItem";
+import AddNavItem from "../components/AddNavItem";
 import logo from "../tappa.png";
 import { useSelector } from "react-redux";
 
@@ -14,7 +15,8 @@ export default function Home() {
         <p>Tappa SA - {user.name}</p>
         <p>South Africas Leading NFC smart business card manufacturer</p>
       </div>
-
+      
+      <AddNavItem/>
       <NavItem text='Visit Our Website'/>
       <NavItem text='Get Your Smart Business Card'/>
 
