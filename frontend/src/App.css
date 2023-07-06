@@ -148,8 +148,7 @@ main {
 
 .add-link-popup-model {
   position: absolute;
-  min-height: 400px;
-  width: 50%;
+  width: 30%;
   min-width: 380px;
   margin: 0 auto;
   top: 32%;
@@ -320,4 +319,30 @@ button:disabled {
   justify-content: center;
   width: 100%;
   gap: 2px;
+}
+
+.add-link-form .form-group{
+  display: flex;
+  flex-direction: column;
+  padding: 0 25px;
+
+}
+.add-link-form input{
+  padding: 10px;
+  width: unset;
+  min-width: unset;
+}
+
+.add-link-form button{
+  width: 80%;
+  margin: 0 20px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.add-link-form label{
+  text-align: left;
+}
+
+.add-link-form-container{
 }
