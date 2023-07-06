@@ -15,8 +15,8 @@ export default function Home() {
         <p>Tappa SA - {user.name}</p>
         <p>South Africas Leading NFC smart business card manufacturer</p>
       </div>
-      
-      <AddNavItem/>
+
+      {user.id && <AddNavItem/>}
       <NavItem text='Visit Our Website'/>
       <NavItem text='Get Your Smart Business Card'/>
 
