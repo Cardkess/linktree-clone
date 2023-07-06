@@ -4,6 +4,6 @@ import { Link } from 'react-router-dom';
 export default function NavItem(props) {
     const { text , link} = props;
   return (
-   <Link className='link-x' to={link}><div className="nav-item"><span>{text}</span><GoShare className='item-share-icon'/></div></Link> 
+   <Link className='link-x' to={link} target="_blank"><div className="nav-item"><span>{text}</span><GoShare className='item-share-icon'/></div></Link> 
   )
 }
