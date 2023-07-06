@@ -2,15 +2,28 @@ import logo from "../tappa.png";
 import { Form, useActionData, useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Login() {
   const data = useActionData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [isSubmiting, setIsSubmiting] = useState(false);
+
   useEffect(() => {
     if (data !== null) {
+
+      if (
+        data !== null &&
+        typeof data === "object" &&
+        data.hasOwnProperty("error")
+      ) {
+        
+        setIsSubmiting(false);
+      }
+
       if (
         data !== null &&
         typeof data === "object" &&
@@ -18,10 +31,17 @@ export default function Login() {
       ) {
         
         dispatch(setUser(data.user));
-        navigate('/');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       }
     }
   }, [data, dispatch, navigate]);
+
+  const handleSubmit = (event) => {
+    setIsSubmiting(true);
+    
+  };
 
   return (
     <div>
@@ -31,20 +51,25 @@ export default function Login() {
 
       <div className="body-container">
         <h1>Sign in</h1>
-        <Form method="post" action="/login">
+        <Form method="post" action="/login" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email:</label>
-            <input type="email" id="email" name="email" required />
+            <input readOnly={isSubmiting} type="email" id="email" name="email" required />
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input type="password" id="password" name="password" required />
+            <input readOnly={isSubmiting} type="password" id="password" name="password" required />
           </div>
           <hr className="login-divider" />
-          <button className="login-submit-btn">Login</button>
+          <button disabled={isSubmiting} className="login-submit-btn">Login</button>
         </Form>
         {data && data.error && <span>{data.error}</span>}
-        {data && data.message && <span>{data.message}</span>}
+        {data && data.message && (
+          <div className="success-message-container">
+            <FaCheckCircle className="success-badge" />
+            <p className="success-message">{data.message}</p>
+          </div>
+        )}
       </div>
     </div>
   );
