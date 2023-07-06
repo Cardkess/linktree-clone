@@ -45,7 +45,7 @@ npm install
 
 3. Rename the `.env.example` file to `.env` in the root of the `linktree-clone/frontend` directory.
 
-4. Edit the `.env` file and update the `REACT_APP_API_URL` value to `http://localhost:3001/api`.
+4. Edit the `.env` file and update the `REACT_APP_BACKEND_API_URL` value to `http://localhost:3001`.
 
 5. Start the frontend development server by running the following command:
 
@@ -83,7 +83,4 @@ To add links to your page, follow these steps:
 
 ## Conclusion
 
-Congratulations! You have successfully installed and set up the linktree clone project. You can now use the backend and frontend servers to create and manage your personal page with links. Don't forget to explore the backend service endpoints
-
-
-
+Congratulations! You have successfully installed and set up the linktree clone project. You can now use the backend and frontend servers to create and manage your personal page with links. Don't forget to explore the backend service
