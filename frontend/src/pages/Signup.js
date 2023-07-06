@@ -28,7 +28,7 @@ export default function Signup() {
         
         setTimeout(() => {
           navigate('/login');
-        }, 2000);
+        }, 1500);
       }
     }
   }, [data, navigate]);

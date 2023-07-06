@@ -33,7 +33,7 @@ export default function Login() {
         dispatch(setUser(data.user));
         setTimeout(() => {
           navigate('/');
-        }, 2000);
+        }, 1500);
       }
     }
   }, [data, dispatch, navigate]);
