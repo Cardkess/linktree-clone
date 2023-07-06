@@ -1,0 +1,277 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is a documentation for all the endpoints used in this backend service",
+      "version": "1.0.0",
+      "title": "Linktree-clone"
+    },
+    "host": "localhost:3001",
+    "basePath": "/api",
+    "tags": [
+      {
+        "name": "link",
+        "description": "Operations about links",
+        "externalDocs": {
+          "description": "Find out more about our store",
+          "url": "http://swagger.io"
+        }
+      },
+      {
+        "name": "auth",
+        "description": "Authentication endpoints"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/links": {
+        "post": {
+          "tags": [
+            "link"
+          ],
+          "summary": "Create a new link",
+          "description": "",
+          "operationId": "createLink",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "Authorization",
+              "description": "Access token",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Link object that needs to be created",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Link"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Link created successfully"
+            },
+            "400": {
+              "description": "Invalid input"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "link"
+          ],
+          "summary": "Get all links",
+          "description": "Returns a list of all links",
+          "operationId": "getAllLinks",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/LinkResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/signup": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "User registration",
+          "description": "Register a new user using the provided credentials.",
+          "operationId": "userRegistration",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User registration data",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserRegistration"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User registered successfully"
+            },
+            "400": {
+              "description": "Invalid input"
+            },
+            "409": {
+              "description": "User already exists"
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "User login",
+          "description": "Authenticate a user and generatean access token.",
+          "operationId": "userLogin",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User login credentials",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserLogin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Authentication successful",
+              "schema": {
+                "$ref": "#/definitions/UserAuthentication"
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            },
+            "401": {
+              "description": "Authentication failed"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Link": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ]
+      },
+      "LinkResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "_id",
+          "title",
+          "url",
+          "userId",
+          "__v"
+        ]
+      },
+      "UserRegistration": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password"
+        ]
+      },
+      "UserLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "UserAuthentication": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "token"
+        ]
+      }
+    }
+  }
+  
