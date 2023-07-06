@@ -10,13 +10,17 @@ require("dotenv").config({ path: __dirname + '/./.env' });
 const authRoutes = require('./routes/auth/routes');
 const linkRoutes = require('./routes/links/routes');
 
+const PORT = process.env.APP_PORT;
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+const DATABASE_NAME = process.env.DATABASE_NAME;
+
 // Connect to the MongoDB database
-mongoose.connect('mongodb://127.0.0.1:27017/linktree-clone', {
+mongoose.connect(MONGODB_URI + DATABASE_NAME, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-const PORT = process.env.APP_PORT;
 
 const app = express();
 
