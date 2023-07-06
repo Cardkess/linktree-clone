@@ -1,5 +1,5 @@
 import logo from "../tappa.png";
-import { Form, useActionData, useNavigate} from "react-router-dom";
+import { Form, NavLink, useActionData, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 import { useEffect, useState } from "react";
@@ -14,13 +14,11 @@ export default function Login() {
 
   useEffect(() => {
     if (data !== null) {
-
       if (
         data !== null &&
         typeof data === "object" &&
         data.hasOwnProperty("error")
       ) {
-        
         setIsSubmiting(false);
       }
 
@@ -29,10 +27,9 @@ export default function Login() {
         typeof data === "object" &&
         data.hasOwnProperty("user")
       ) {
-        
         dispatch(setUser(data.user));
         setTimeout(() => {
-          navigate('/');
+          navigate("/");
         }, 1500);
       }
     }
@@ -40,7 +37,6 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     setIsSubmiting(true);
-    
   };
 
   return (
@@ -54,14 +50,30 @@ export default function Login() {
         <Form method="post" action="/login" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email:</label>
-            <input readOnly={isSubmiting} type="email" id="email" name="email" required />
+            <input
+              readOnly={isSubmiting}
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input readOnly={isSubmiting} type="password" id="password" name="password" required />
+            <input
+              readOnly={isSubmiting}
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
           </div>
           <hr className="login-divider" />
-          <button disabled={isSubmiting} className="login-submit-btn">Login</button>
+          <button disabled={isSubmiting} className="login-submit-btn">
+            Login
+          </button>
+
+          <NavLink className='signup-link' to='/signup'>Sign up</NavLink>
         </Form>
         {data && data.error && <span>{data.error}</span>}
         {data && data.message && (
@@ -70,13 +82,13 @@ export default function Login() {
             <p className="success-message">{data.message}</p>
           </div>
         )}
+
       </div>
     </div>
   );
 }
 
 export const loginAction = async ({ request }) => {
-
   const data = await request.formData();
 
   const url = process.env.REACT_APP_BACKEND_API_URL + "/auth/login";
@@ -97,11 +109,9 @@ export const loginAction = async ({ request }) => {
 
     if (response.ok) {
       const data = await response.json();
-     
-      return data
 
+      return data;
     } else {
-
       const data = await response.json();
 
       throw new Error(data.error);
