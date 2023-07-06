@@ -269,3 +269,8 @@ main {
   font-size: 30px;
   color: #ea5732;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
