@@ -180,6 +180,11 @@ main {
   border: 1px solid rgba(186, 186, 184, 0.897);
 }
 
+.btn-logout {
+  background-color: rgba(200, 33, 33, 0.878);
+  color: white;
+}
+
 .popup-close-icon {
   position: absolute;
   right: 20px;
