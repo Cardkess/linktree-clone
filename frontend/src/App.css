@@ -274,3 +274,15 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.success-badge{
+  color: green;
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.success-message-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

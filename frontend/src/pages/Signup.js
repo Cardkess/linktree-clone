@@ -1,6 +1,7 @@
 import logo from "../tappa.png";
 import { Form, useActionData } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Signup() {
   const [isSubmiting, setIsSubmiting] = useState(false);
@@ -9,8 +10,11 @@ export default function Signup() {
   // Enable submit button when response is received
   useEffect(() => {
     if (data !== null) {
-      
-      if (data !== null && typeof data === 'object' && data.hasOwnProperty('error')) {
+      if (
+        data !== null &&
+        typeof data === "object" &&
+        data.hasOwnProperty("error")
+      ) {
         setIsSubmiting(false);
       }
     }
@@ -32,15 +36,33 @@ export default function Signup() {
         <Form method="post" action="/signup" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name:</label>
-            <input readOnly={isSubmiting} type="text" id="name" name="name" required />
+            <input
+              readOnly={isSubmiting}
+              type="text"
+              id="name"
+              name="name"
+              required
+            />
           </div>
           <div className="form-group">
             <label>Email:</label>
-            <input readOnly={isSubmiting} type="email" id="email" name="email" required />
+            <input
+              readOnly={isSubmiting}
+              type="email"
+              id="email"
+              name="email"
+              required
+            />
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input readOnly={isSubmiting} type="password" id="password" name="password" required />
+            <input
+              readOnly={isSubmiting}
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
           </div>
           <div className="form-group">
             <p>
@@ -56,14 +78,22 @@ export default function Signup() {
         </Form>
 
         {data && data.error && <span>{data.error}</span>}
-        {data && data.message && <span>{data.message}</span>}
+        {data && data.message && (
+          <div className="success-message-container">
+            <FaCheckCircle className="success-badge" />
+            <p className="success-message">{data.message}</p>
+          </div>
+        )}
+        {data && data.message && (
+            <span className="success-message">Redirecting to Login ...</span>
+         
+        )}
       </div>
     </div>
   );
 }
 
 export const singupAction = async ({ request }) => {
-  
   const data = await request.formData();
 
   const url = process.env.REACT_APP_BACKEND_API_URL + "/auth/signup";
@@ -78,7 +108,6 @@ export const singupAction = async ({ request }) => {
     return { error: "Password must be 8 characters or long." };
   }
 
-
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -92,9 +121,7 @@ export const singupAction = async ({ request }) => {
       const data = await response.json();
 
       return data;
-
     } else {
-
       const data = await response.json();
       throw new Error(data.error);
     }
