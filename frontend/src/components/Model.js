@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import {AiOutlineClose} from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggle } from "./toggleButtonSlice";
+import { toggle } from "../store/toggleButtonSlice";
 
 export default function Model() {
 

@@ -1,5 +1,5 @@
 import logo from "../tappa.png";
-import { Form, useActionData } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -120,7 +120,7 @@ export const singupAction = async ({ request }) => {
     if (response.ok) {
       const data = await response.json();
 
-      return data;
+      return redirect('/login');
     } else {
       const data = await response.json();
       throw new Error(data.error);

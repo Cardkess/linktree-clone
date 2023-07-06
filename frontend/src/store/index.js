@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import toggleButtonReducer from './components/toggleButtonSlice';
+import toggleButtonReducer from './toggleButtonSlice';
 
 export default configureStore({
   reducer: {

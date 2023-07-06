@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { toggle } from "./toggleButtonSlice";
+import { toggle } from "../store/toggleButtonSlice";
 import { TiArrowBack } from "react-icons/ti";
 import { BsThreeDots } from "react-icons/bs";
 

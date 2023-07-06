@@ -1,7 +1,7 @@
 import "./App.css";
 
 // importing store
-import store from "./store";
+import store from "./store/index";
 import { Provider } from "react-redux";
 
 // importing pages/screens
