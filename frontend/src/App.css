@@ -146,6 +146,22 @@ main {
   border-radius: 15px;
 }
 
+.add-link-popup-model {
+  position: absolute;
+  min-height: 400px;
+  width: 50%;
+  min-width: 380px;
+  margin: 0 auto;
+  top: 32%;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.752);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 200;
+  border-radius: 15px;
+}
+
 .popup-model header h4 {
   margin-top: 25px;
   margin-bottom: 5px;
