@@ -2,10 +2,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 // Load .env variables
 require("dotenv").config({ path: __dirname + '/./.env' });
-const userRoutes = require('./routes/users/routes');
 const authRoutes = require('./routes/auth/routes');
 const linkRoutes = require('./routes/links/routes');
 
@@ -21,6 +22,7 @@ const app = express();
 
 // Defining middleware functions to parse request bodies and handle CORS
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
@@ -30,7 +32,6 @@ app.use((err, req, res, next) => {
 });
 
 // registering routes
-app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/links', linkRoutes);
 
