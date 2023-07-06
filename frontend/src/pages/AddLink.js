@@ -69,7 +69,7 @@ export default function AddLink() {
               />
             </div>
             <input type="hidden" name="token" value={user.token} />
-            <button disabled={isSubmiting} className="login-submit-btn">
+            <button disabled={isSubmiting} className="add-link-submit-btn">
               Create Link
             </button>
           </Form>
@@ -82,9 +82,7 @@ export default function AddLink() {
             <p className="success-message">{data.message}</p>
           </div>
         )}
-        {data && data.message && (
-          <span className="success-message">Redirecting to Login ...</span>
-        )}
+      
       </div>
     </div>
   );

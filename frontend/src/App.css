@@ -295,6 +295,19 @@ main {
   width: 100%;
 }
 
+.add-link-submit-btn {
+  color: white;
+  border: 1px solid rgba(225, 225, 225, 0.757);
+  cursor: pointer;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 35px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #ea5732;
+}
+
 .login-divider{
   margin-bottom: 20px;
   border-color: #ea57325d;
@@ -335,7 +348,6 @@ button:disabled {
 .add-link-form .form-group{
   display: flex;
   flex-direction: column;
-  padding: 0 25px;
 
 }
 .add-link-form input{
@@ -345,9 +357,9 @@ button:disabled {
 }
 
 .add-link-form button{
-  width: 80%;
-  margin: 0 20px;
+  width:100%;
   margin-bottom: 30px;
+  margin-top: 30px;
   font-size: 20px;
 }
 
