@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import {AiOutlineClose} from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggle } from "../store/toggleButtonSlice";
+import { setUser } from "../store/userSlice";
 
 export default function Model() {
 
@@ -10,6 +11,11 @@ export default function Model() {
   const user = useSelector((state) => state.user.value);
 
   const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(setUser({}));
+    dispatch(toggle());
+  }
 
   return (
     
@@ -26,6 +32,8 @@ export default function Model() {
             {!user.id && <NavLink onClick={() => dispatch(toggle())} to='login' className='popup-nav-link btn-login'>Login</NavLink>}
             
             {!user.id && <NavLink onClick={() => dispatch(toggle())} to='signup' className='popup-nav-link btn-signup'>Sign up</NavLink>}
+
+            {user.id && <NavLink onClick={logout} className='popup-nav-link btn-logout'>Log out</NavLink>}
           </div>
           
         </div>
