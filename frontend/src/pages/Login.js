@@ -1,8 +1,27 @@
 import logo from "../tappa.png";
-import { Form, useActionData} from "react-router-dom";
+import { Form, useActionData, useNavigate} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/userSlice";
+import { useEffect } from "react";
 
 export default function Login() {
   const data = useActionData();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data !== null) {
+      if (
+        data !== null &&
+        typeof data === "object" &&
+        data.hasOwnProperty("user")
+      ) {
+        
+        dispatch(setUser(data.user));
+        navigate('/');
+      }
+    }
+  }, [data, dispatch, navigate]);
 
   return (
     <div>
@@ -53,7 +72,7 @@ export const loginAction = async ({ request }) => {
 
     if (response.ok) {
       const data = await response.json();
-
+     
       return data
 
     } else {
