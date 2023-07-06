@@ -1,13 +1,13 @@
 import logo from "../tappa.png";
-import { Form, redirect, useActionData } from "react-router-dom";
+import { Form, useActionData, Navigate  } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function Signup() {
   const [isSubmiting, setIsSubmiting] = useState(false);
-
   const data = useActionData();
   // Enable submit button when response is received
+
   useEffect(() => {
     if (data !== null) {
       if (
@@ -15,6 +15,7 @@ export default function Signup() {
         typeof data === "object" &&
         data.hasOwnProperty("error")
       ) {
+        
         setIsSubmiting(false);
       }
     }
@@ -22,6 +23,7 @@ export default function Signup() {
 
   const handleSubmit = (event) => {
     setIsSubmiting(true);
+    
   };
 
   return (
@@ -85,9 +87,12 @@ export default function Signup() {
           </div>
         )}
         {data && data.message && (
-            <span className="success-message">Redirecting to Login ...</span>
-         
+          <span className="success-message">Redirecting to Login ...</span>
         )}
+        {data && data.message && (
+          <Navigate to="/login" />
+        )}
+       
       </div>
     </div>
   );
@@ -119,8 +124,7 @@ export const singupAction = async ({ request }) => {
 
     if (response.ok) {
       const data = await response.json();
-
-      return redirect('/login');
+      return data;
     } else {
       const data = await response.json();
       throw new Error(data.error);
