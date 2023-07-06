@@ -1,8 +1,21 @@
 import logo from "../tappa.png";
 import { Form, useActionData } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function Signup() {
+  const [isSubmiting, setIsSubmiting] = useState(false);
+
   const data = useActionData();
+  // Enable submit button when response is received
+  useEffect(() => {
+    if (data !== null) {
+      setIsSubmiting(false);
+    }
+  }, [data]);
+
+  const handleSubmit = (event) => {
+    setIsSubmiting(true);
+  };
 
   return (
     <div>
@@ -13,7 +26,7 @@ export default function Signup() {
       <div className="body-container">
         <h1>Create your account</h1>
 
-        <Form method="post" action="/signup">
+        <Form method="post" action="/signup" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name:</label>
             <input type="text" id="name" name="name" required />
@@ -34,19 +47,20 @@ export default function Signup() {
             </p>
           </div>
 
-          <button className="signup-submit-btn">Submit</button>
+          <button disabled={isSubmiting} className="signup-submit-btn">
+            Submit
+          </button>
         </Form>
 
         {data && data.error && <span>{data.error}</span>}
         {data && data.message && <span>{data.message}</span>}
-        
       </div>
     </div>
   );
 }
 
 export const singupAction = async ({ request }) => {
-  // TODO: implement signup logic here...
+  
   const data = await request.formData();
 
   const url = process.env.REACT_APP_BACKEND_API_URL + "/auth/signup";
@@ -61,6 +75,7 @@ export const singupAction = async ({ request }) => {
     return { error: "Password must be 8 characters or long." };
   }
 
+
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -73,16 +88,14 @@ export const singupAction = async ({ request }) => {
     if (response.ok) {
       const data = await response.json();
 
-      return data
+      return data;
 
     } else {
 
       const data = await response.json();
-
       throw new Error(data.error);
     }
   } catch (error) {
-
     return { error: error.message };
   }
 };
