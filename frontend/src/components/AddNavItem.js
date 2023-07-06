@@ -1,6 +1,5 @@
 import {MdAddCircle} from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { toggle } from '../store/toggleAddLinkModelSlice';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ export default function NavItem() {
   const createLinks = () => {
 
     if(user.id) {
-      dispatch(toggle());
+      navigate('/add-link');
     } else {
       navigate('/login');
     }

@@ -13,20 +13,12 @@ export default function Login() {
   const [isSubmiting, setIsSubmiting] = useState(false);
 
   useEffect(() => {
-    if (data !== null) {
-      if (
-        data !== null &&
-        typeof data === "object" &&
-        data.hasOwnProperty("error")
-      ) {
+    if (data !== null && typeof data === "object") {
+      if (data.hasOwnProperty("error")) {
         setIsSubmiting(false);
       }
 
-      if (
-        data !== null &&
-        typeof data === "object" &&
-        data.hasOwnProperty("user")
-      ) {
+      if (data.hasOwnProperty("user")) {
         dispatch(setUser(data.user));
         setTimeout(() => {
           navigate("/");
@@ -73,7 +65,9 @@ export default function Login() {
             Login
           </button>
 
-          <NavLink className='signup-link' to='/signup'>Sign up</NavLink>
+          <NavLink className="signup-link" to="/signup">
+            Sign up
+          </NavLink>
         </Form>
         {data && data.error && <span>{data.error}</span>}
         {data && data.message && (
@@ -82,7 +76,6 @@ export default function Login() {
             <p className="success-message">{data.message}</p>
           </div>
         )}
-
       </div>
     </div>
   );

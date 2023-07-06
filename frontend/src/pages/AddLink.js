@@ -1,69 +1,51 @@
-import { AiOutlineClose } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import { toggle } from "../store/toggleAddLinkModelSlice";
+import logo from "../tappa.png";
+import { FaCheckCircle } from "react-icons/fa";
+// import { AiOutlineClose } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export default function AddLinkModel() {
+export default function AddLink() {
   const [isSubmiting, setIsSubmiting] = useState(false);
 
-  const visibilty = useSelector((state) => state.addLinkModel.value);
   const user = useSelector((state) => state.user.value);
-
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const data = useActionData();
 
   useEffect(() => {
-    if (data !== null) {
-
-      setIsSubmiting(false);
-
-      if (
-        data !== null &&
-        typeof data === "object" &&
-        data.hasOwnProperty("error")
-      ) {
-        
+    if (data !== null && typeof data === "object") {
+      if (data.hasOwnProperty("error")) {
         setIsSubmiting(false);
       }
 
-      if (
-        data !== null &&
-        typeof data === "object" &&
-        data.hasOwnProperty("message")
-      ) {
-        
-        dispatch(toggle());
-        
+      if (data.hasOwnProperty("message")) {
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       }
     }
-  }, [data, dispatch, navigate]);
+  }, [data, navigate]);
 
   const handleSubmit = (event) => {
     setIsSubmiting(true);
   };
 
   return (
-    <div className={`add-link-model-container ${visibilty ? "visible" : "hidden"}`}>
-      <div className="add-link-popup-model">
-        <header>
-          <AiOutlineClose
-            onClick={() => dispatch(toggle())}
-            className="popup-close-icon"
-          />
-          <h4>Create your own Linktree</h4>
-          <span>The only link in bio trusted by 35M+ people.</span>
-        </header>
-        <hr />
+    <div>
+      <div className="logo-container">
+        <img className="logo" src={logo} alt="logo" />
+      </div>
+
+      <div className="body-container">
+        <h1>Add a Link</h1>
 
         <div className="add-link-form-container">
           <Form
             className="add-link-form"
             method="post"
-            action="/"
+            action="/add-link"
             onSubmit={handleSubmit}
           >
             <div className="form-group">
@@ -92,19 +74,28 @@ export default function AddLinkModel() {
             </button>
           </Form>
         </div>
+
+        {data && data.error && <span>{data.error}</span>}
+        {data && data.message && (
+          <div className="success-message-container">
+            <FaCheckCircle className="success-badge" />
+            <p className="success-message">{data.message}</p>
+          </div>
+        )}
+        {data && data.message && (
+          <span className="success-message">Redirecting to Login ...</span>
+        )}
       </div>
     </div>
   );
 }
 
-
 export const addLinkAction = async ({ request }) => {
-
   const data = await request.formData();
 
   const url = process.env.REACT_APP_BACKEND_API_URL + "/links";
 
-  const token = data.get("token")
+  const token = data.get("token");
   const submition = {
     title: data.get("title"),
     url: data.get("url"),
@@ -115,18 +106,16 @@ export const addLinkAction = async ({ request }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `${token}`
+        Authorization: `${token}`,
       },
       body: JSON.stringify(submition),
     });
 
     if (response.ok) {
       const data = await response.json();
-     
-      return data
 
+      return data;
     } else {
-
       const data = await response.json();
 
       throw new Error(data.error);

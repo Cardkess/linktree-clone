@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import Home, { linksLoader } from "./pages/Home";
 import Signup,  { singupAction } from "./pages/Signup";
 import Login, { loginAction } from "./pages/Login";
+import AddLink, {addLinkAction } from "./pages/AddLink";
 
 import RootLayout from "./layouts/RootLayout";
 
@@ -17,14 +18,15 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { addLinkAction } from "./components/AddLinkModel";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout /> } action={addLinkAction}>
+    <Route path="/" element={<RootLayout /> }>
       <Route index element={<Home />} loader={linksLoader} />
       <Route path="signup" element={<Signup />} action={singupAction} />
       <Route path="login" element={<Login />} action={loginAction} />
+      <Route path="add-link" element={<AddLink />} action={addLinkAction} />
     </Route>
   )
 );
