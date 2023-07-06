@@ -9,7 +9,10 @@ export default function Signup() {
   // Enable submit button when response is received
   useEffect(() => {
     if (data !== null) {
-      setIsSubmiting(false);
+      
+      if (data !== null && typeof data === 'object' && data.hasOwnProperty('error')) {
+        setIsSubmiting(false);
+      }
     }
   }, [data]);
 
@@ -29,15 +32,15 @@ export default function Signup() {
         <Form method="post" action="/signup" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name:</label>
-            <input type="text" id="name" name="name" required />
+            <input readOnly={isSubmiting} type="text" id="name" name="name" required />
           </div>
           <div className="form-group">
             <label>Email:</label>
-            <input type="email" id="email" name="email" required />
+            <input readOnly={isSubmiting} type="email" id="email" name="email" required />
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input type="password" id="password" name="password" required />
+            <input readOnly={isSubmiting} type="password" id="password" name="password" required />
           </div>
           <div className="form-group">
             <p>
