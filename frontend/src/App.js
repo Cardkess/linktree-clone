@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 // importing pages/screens
 import Home from "./pages/Home";
 import Signup,  { singupAction } from "./pages/Signup";
-import Login from "./pages/Login";
+import Login, { loginAction } from "./pages/Login";
 
 import RootLayout from "./layouts/RootLayout";
 
@@ -23,7 +23,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="signup" element={<Signup />} action={singupAction} />
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />} action={loginAction} />
     </Route>
   )
 );
