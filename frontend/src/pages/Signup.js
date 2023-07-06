@@ -38,6 +38,8 @@ export default function Signup() {
         </Form>
 
         {data && data.error && <span>{data.error}</span>}
+        {data && data.message && <span>{data.message}</span>}
+        
       </div>
     </div>
   );
@@ -70,15 +72,14 @@ export const singupAction = async ({ request }) => {
 
     if (response.ok) {
       const data = await response.json();
-    
-      if (data.code === '201'){
-        return { error: 'User created successfuly.' };
-      }
 
-      return { error: data.error };
+      return data
 
     } else {
-      throw new Error(response.statusText);
+
+      const data = await response.json();
+
+      throw new Error(data.error);
     }
   } catch (error) {
 
