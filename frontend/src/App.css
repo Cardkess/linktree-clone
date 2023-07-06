@@ -113,6 +113,10 @@ main {
   visibility: hidden;
 }
 
+.add-icon {
+  font-size: 23px;
+}
+
 .nav-item:hover > .item-share-icon {
   visibility: visible;
 }
@@ -290,4 +294,14 @@ button:disabled {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.add-item-container-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  gap: 2px;
 }
