@@ -7,6 +7,7 @@ const cors = require('cors');
 require("dotenv").config({ path: __dirname + '/./.env' });
 const userRoutes = require('./routes/users/routes');
 const authRoutes = require('./routes/auth/routes');
+const linkRoutes = require('./routes/links/routes');
 
 // Connect to the MongoDB database
 mongoose.connect('mongodb://127.0.0.1:27017/linktree-clone', {
@@ -31,6 +32,7 @@ app.use((err, req, res, next) => {
 // registering routes
 app.use('/api', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/links', linkRoutes);
 
 // Check the MongoDB connection
 const db = mongoose.connection;

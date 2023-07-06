@@ -9,10 +9,15 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
     if (err) {
+      
       return res.status(401).json({ message: 'Invalid or expired token' });
     }
 
-    req.userId = decodedToken.userId;
+    
+
+    req.body.userId = decodedToken.userId;
+
+    
     next();
   });
 };

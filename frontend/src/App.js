@@ -5,7 +5,7 @@ import store from "./store/index";
 import { Provider } from "react-redux";
 
 // importing pages/screens
-import Home from "./pages/Home";
+import Home, { linksLoader } from "./pages/Home";
 import Signup,  { singupAction } from "./pages/Signup";
 import Login, { loginAction } from "./pages/Login";
 
@@ -17,11 +17,12 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+import { addLinkAction } from "./components/AddLinkModel";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
+    <Route path="/" element={<RootLayout /> } action={addLinkAction}>
+      <Route index element={<Home />} loader={linksLoader} />
       <Route path="signup" element={<Signup />} action={singupAction} />
       <Route path="login" element={<Login />} action={loginAction} />
     </Route>
