@@ -6,6 +6,9 @@ import { toggle } from "../store/toggleButtonSlice";
 export default function Model() {
 
   const visibilty = useSelector((state) => state.toggleButton.value);
+
+  const user = useSelector((state) => state.user.value);
+
   const dispatch = useDispatch();
 
   return (
@@ -20,8 +23,9 @@ export default function Model() {
           <hr/>
 
           <div className="popup-model-links">
-            <NavLink onClick={() => dispatch(toggle())} to='login' className='popup-nav-link btn-login'>Login</NavLink>
-            <NavLink onClick={() => dispatch(toggle())} to='signup' className='popup-nav-link btn-signup'>Sign up</NavLink>
+            {!user.id && <NavLink onClick={() => dispatch(toggle())} to='login' className='popup-nav-link btn-login'>Login</NavLink>}
+            
+            {!user.id && <NavLink onClick={() => dispatch(toggle())} to='signup' className='popup-nav-link btn-signup'>Sign up</NavLink>}
           </div>
           
         </div>
