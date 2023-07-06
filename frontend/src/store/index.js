@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import toggleButtonReducer from './toggleButtonSlice';
-import toggleAddLinkModelReducer from './toggleAddModelSlice';
+import toggleAddLinkModelReducer from './toggleAddLinkModelSlice';
 
 import userReducer from './userSlice';
 
