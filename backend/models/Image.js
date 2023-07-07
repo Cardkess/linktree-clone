@@ -7,6 +7,7 @@ const imageSchema = new mongoose.Schema({
   },
   contentType: {
     type: String,
+    default: 'image/png',
     required: true,
   },
 });
