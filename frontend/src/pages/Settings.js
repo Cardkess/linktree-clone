@@ -39,7 +39,7 @@ export default function Settings() {
     } else {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        backgroundColor: "black",
+        backgroundColor: "#000000",
       }));
     }
     if (settings && settings.theme) {
