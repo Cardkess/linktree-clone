@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const uiSettingsSchema = new mongoose.Schema({
+const settingsSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -23,8 +23,13 @@ const uiSettingsSchema = new mongoose.Schema({
     enum: ["light", "dark"],
     required: true,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
-const UISettings = mongoose.model("UISettings", uiSettingsSchema);
+const Settings = mongoose.model("Settings", settingsSchema);
 
-module.exports = UISettings;
+module.exports = Settings;
