@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../tappa.png";
 import { Form } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
+import { addSettings } from "../store/settingsSlice";
 
 export default function Settings() {
   const user = useSelector((state) => state.user.value);
+  const settings = useSelector((state) => state.settings.value);
+  const dispatch = useDispatch();
+
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
@@ -15,6 +19,33 @@ export default function Settings() {
     theme: "light",
   });
   const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (settings && settings.title) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        title: settings.title,
+      }));
+    }
+    if (settings && settings.subTitle) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        subTitle: settings.subTitle,
+      }));
+    }
+    if (settings && settings.backgroundColor) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        backgroundColor: settings.backgroundColor,
+      }));
+    }
+    if (settings && settings.theme) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        theme: settings.theme,
+      }));
+    }
+  }, [settings]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -70,6 +101,7 @@ export default function Settings() {
             <input
               type="text"
               value={formData.title}
+              required
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
@@ -81,6 +113,7 @@ export default function Settings() {
             <input
               type="text"
               value={formData.subTitle}
+              required
               onChange={(e) =>
                 setFormData({ ...formData, subTitle: e.target.value })
               }
@@ -93,6 +126,7 @@ export default function Settings() {
               type="color"
               id="colorPicker"
               name="colorPicker"
+              required
               value={formData.backgroundColor}
               onChange={(e) =>
                 setFormData({ ...formData, backgroundColor: e.target.value })
@@ -105,6 +139,7 @@ export default function Settings() {
             <select
               id="themeSelect"
               name="theme"
+              required
               value={formData.theme}
               onChange={(e) =>
                 setFormData({ ...formData, theme: e.target.value })
@@ -121,6 +156,7 @@ export default function Settings() {
               type="file"
               id="imageUpload"
               name="imageUpload"
+              required
               accept="image/png"
               onChange={handleFileChange}
             ></input>
@@ -133,16 +169,14 @@ export default function Settings() {
           </div>
         </Form>
         <div className="setting-notification-container">
-        {data && data.message && (
-          <div className="success-message-container">
-            <FaCheckCircle className="success-badge" />
-            <p className="success-message">{data.message}</p>
-          </div>
-        )}
-        {data && data.error && <span>{data.error}</span>}
-        
+          {data && data.message && (
+            <div className="success-message-container">
+              <FaCheckCircle className="success-badge" />
+              <p className="success-message">{data.message}</p>
+            </div>
+          )}
+          {data && data.error && <span>{data.error}</span>}
         </div>
-       
       </div>
     </div>
   );
