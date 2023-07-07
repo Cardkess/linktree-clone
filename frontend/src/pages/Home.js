@@ -5,24 +5,29 @@ import { useSelector } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 
 export default function Home() {
-
   const links = useLoaderData();
 
   const user = useSelector((state) => state.user.value);
+
+  const settings = useSelector((state) => state.settings.value);
+
   return (
     <div>
       <div className="logo-container">
-        <img className="logo" src={logo} alt="logo" />
+        {settings === null ? <img className="logo" src={logo} alt="logo" /> :  <img className="logo" src={logo} alt="logo" />}
+        
       </div>
 
       <div className="title-section">
-        <p>Tappa SA - {user.name}</p>
-        <p>South Africas Leading NFC smart business card manufacturer</p>
+        {settings === null ? <p>Tappa SA</p> : <p>{settings.title}</p>}
+
+        {settings === null ? <p>South Africas Leading NFC smart business card manufacturer</p> : <p>{settings.subTitle}</p>}
+        
       </div>
 
       {(user.id || links.length === 0) && <AddNavItem />}
-      {links.map( link => (
-        <NavItem link={link.url} text={link.title} key={link._id}/>
+      {links.map((link) => (
+        <NavItem link={link.url} text={link.title} key={link._id} />
       ))}
     </div>
   );

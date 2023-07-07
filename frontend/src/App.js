@@ -11,7 +11,7 @@ import Login, { loginAction } from "./pages/Login";
 import AddLink, {addLinkAction } from "./pages/AddLink";
 import Settings from "./pages/Settings";
 
-import RootLayout from "./layouts/RootLayout";
+import RootLayout, { settingsLoader } from "./layouts/RootLayout";
 
 import {
   createBrowserRouter,
@@ -24,7 +24,7 @@ import {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout /> }>
+    <Route path="/" element={<RootLayout /> } loader={settingsLoader}>
       <Route index element={<Home />} loader={linksLoader} />
       <Route path="signup" element={<Signup />} action={singupAction} />
       <Route path="login" element={<Login />} action={loginAction} />

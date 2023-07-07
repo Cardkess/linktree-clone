@@ -15,7 +15,8 @@ export default function Signup() {
         setIsSubmiting(false);
       }
 
-      if (data.hasOwnProperty("message")) {
+      if (data.hasOwnProperty("message")
+      ) {
         setTimeout(() => {
           navigate("/login");
         }, 1500);
