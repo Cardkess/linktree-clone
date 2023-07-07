@@ -47,6 +47,11 @@ export default function Settings() {
         ...prevFormData,
         theme: settings.theme,
       }));
+    }else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        theme: "light",
+      }));
     }
   }, [settings]);
 
