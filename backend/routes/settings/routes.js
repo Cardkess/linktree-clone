@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
 const authenticateToken = require("../../middleware/auth/middleware");
 
 // Importing models
 const Image = require("../../models/Image");
 const Settings = require("../../models/Settings");
 
-// Define route to create a new Link
+// Define route to create /update settings
+// Define route to create/update settings
 router.post("/", authenticateToken, async (req, res) => {
   try {
     // Extract link data from the request body
@@ -21,29 +21,53 @@ router.post("/", authenticateToken, async (req, res) => {
       contentType: "image/png",
     });
 
-    // Save the image to the database
-    const savedImage = await image.save();
+    // Check if image exists
+    let existingImage = await Image.findOne();
 
-    // Creating new Image instance
-    const newImage = savedImage; // Reference the savedImage directly
+    if (existingImage) {
+      // Image exists, update the existing record
+      existingImage.set({
+        data: imageData,
+        contentType: "image/png",
+      });
 
-    // Creating new Settings instance
-    const newSettings = new Settings({
-      title,
-      subTitle,
-      backgroundColor,
-      logo: newImage, // Reference the newImage instance
-      theme,
-      userId,
-    });
+      await existingImage.save();
+    } else {
+      // Image does not exist, create a new record
+      existingImage = await image.save();
+    }
 
-    // Saving the new Settings to the database
-    await newSettings.save();
+    // Check if settings exist
+    const existingSettings = await Settings.findOne();
+
+    if (existingSettings) {
+      // Settings exist, update the existing record
+      existingSettings.title = title;
+      existingSettings.subTitle = subTitle;
+      existingSettings.backgroundColor = backgroundColor;
+      existingSettings.theme = theme;
+      existingSettings.logo = existingImage._id; // Use the existingImage ID
+      existingSettings.userId = userId;
+
+      await existingSettings.save();
+    } else {
+      // Settings do not exist, create a new record
+      const newSettings = new Settings({
+        title,
+        subTitle,
+        backgroundColor,
+        logo: existingImage._id, // Use the existingImage ID
+        theme,
+        userId,
+      });
+
+      await newSettings.save();
+    }
 
     // Return a success response
     res
       .status(201)
-      .json({ code: "201", message: "Settings created successfully" });
+      .json({ code: "201", message: "Settings created/updated successfully" });
   } catch (error) {
     // Return an error response
     if (error.code === 11000 && error.keyPattern && error.keyValue) {
@@ -62,11 +86,14 @@ router.post("/", authenticateToken, async (req, res) => {
   }
 });
 
+
+
+
 // Defining route to list all Links
 router.get("/", async (req, res) => {
   try {
     // Retrieving all links from the database
-    const settings = await Settings.find().populate("logo");
+    const settings = await Settings.findOne().populate("logo");
 
     // Return the list of links
     res.status(200).json(settings);
