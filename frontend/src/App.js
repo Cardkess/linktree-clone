@@ -9,6 +9,7 @@ import Home, { linksLoader } from "./pages/Home";
 import Signup,  { singupAction } from "./pages/Signup";
 import Login, { loginAction } from "./pages/Login";
 import AddLink, {addLinkAction } from "./pages/AddLink";
+import Settings from "./pages/Settings";
 
 import RootLayout from "./layouts/RootLayout";
 
@@ -20,6 +21,7 @@ import {
 } from "react-router-dom";
 
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout /> }>
@@ -27,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<Signup />} action={singupAction} />
       <Route path="login" element={<Login />} action={loginAction} />
       <Route path="add-link" element={<AddLink />} action={addLinkAction} />
+      <Route path="settings" element={<Settings />} />
     </Route>
   )
 );
