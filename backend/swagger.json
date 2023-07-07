@@ -194,7 +194,7 @@
       },
       "get": {
         "tags": ["settings"],
-        "summary": "Get all Settings",
+        "summary": "Get the current Settings object",
         "description": "Returns a list of all Settings",
         "operationId": "getAllSettings",
         "produces": ["application/json"],
@@ -202,10 +202,9 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SettingsResponse"
-              }
+              "type": "object",
+              "$ref": "#/definitions/SettingsResponse"
+              
             }
           }
         }
@@ -368,9 +367,8 @@
         },
         "logo": {
           "type": "object",
-          "logo": {
-            "$ref": "#/definitions/Logo"
-          }
+          "$ref": "#/definitions/Logo"
+        
         },
         "theme": {
           "type": "string"
