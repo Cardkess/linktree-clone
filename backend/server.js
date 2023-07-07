@@ -9,6 +9,7 @@ const swaggerDocument = require('./swagger.json');
 require("dotenv").config({ path: __dirname + '/./.env' });
 const authRoutes = require('./routes/auth/routes');
 const linkRoutes = require('./routes/links/routes');
+const settingsRoutes = require('./routes/settings/routes');
 
 const PORT = process.env.APP_PORT;
 
@@ -30,6 +31,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error' });
@@ -38,6 +40,7 @@ app.use((err, req, res, next) => {
 // registering routes
 app.use('/api/auth', authRoutes);
 app.use('/api/links', linkRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Check the MongoDB connection
 const db = mongoose.connection;
