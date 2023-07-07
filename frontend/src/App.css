@@ -373,3 +373,90 @@ button:disabled {
 .link-x{
   text-decoration: none;
 }
+
+.Setting-main {
+  background-color: #f5f6fa;
+  border-radius: 15px;
+  padding: 5px 15px;
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.settings-form-group {
+  margin-top: 15px;
+}
+
+.settings-form-group label {
+  display: block;
+  font-size: 16px;
+  padding: 2px 0px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.settings-form-group input[type="text"],
+.settings-form-group input[type="color"],
+.settings-form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+.settings-form-group input[type="text"] {
+  margin-top: 5px;
+}
+
+.settings-form-group select {
+  margin-top: 10px;
+}
+
+.settings-form-group input[type="text"]:focus,
+.settings-form-group input[type="color"]:focus,
+.settings-form-group select:focus {
+  outline: none;
+  border-color: #7b9cde;
+  box-shadow: 0 0 5px rgba(123, 156, 222, 0.5);
+}
+
+.settings-form-group input[type="color"] {
+  padding: 0px;
+}
+
+.settings-form-group input[type="file"] {
+ float: left;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
+}
+
+.save-settings-btn{
+  margin-top: 40px;
+  color: white;
+  border: 1px solid rgba(225, 225, 225, 0.757);
+  cursor: pointer;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 35px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #ea5732;
+  width: 100%;
+}
