@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import logo from "../tappa.png";
 import { Form } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
-import { addSettings } from "../store/settingsSlice";
 
 export default function Settings() {
   const user = useSelector((state) => state.user.value);
   const settings = useSelector((state) => state.settings.value);
-  const dispatch = useDispatch();
-
+ 
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
@@ -37,6 +35,11 @@ export default function Settings() {
       setFormData((prevFormData) => ({
         ...prevFormData,
         backgroundColor: settings.backgroundColor,
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        backgroundColor: "black",
       }));
     }
     if (settings && settings.theme) {
@@ -70,6 +73,8 @@ export default function Settings() {
 
       const responseData = response.data;
       setData(responseData);
+      // Refresh the page
+      window.location.reload();
     } catch (error) {
       setData({ error: error.message });
     }
