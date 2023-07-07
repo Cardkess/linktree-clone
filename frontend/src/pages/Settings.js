@@ -132,13 +132,17 @@ export default function Settings() {
             </button>
           </div>
         </Form>
-        {data && data.error && <span>{data.error}</span>}
+        <div className="setting-notification-container">
         {data && data.message && (
           <div className="success-message-container">
             <FaCheckCircle className="success-badge" />
             <p className="success-message">{data.message}</p>
           </div>
         )}
+        {data && data.error && <span>{data.error}</span>}
+        
+        </div>
+       
       </div>
     </div>
   );
