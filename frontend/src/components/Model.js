@@ -33,9 +33,10 @@ export default function Model() {
             
             {!user.id && <NavLink onClick={() => dispatch(toggle())} to='signup' className='popup-nav-link btn-signup'>Sign up</NavLink>}
 
-            {user.id && <NavLink onClick={logout} className='popup-nav-link btn-login'>Settings</NavLink>}
+            {user.id && <NavLink onClick={() => dispatch(toggle())} to='settings' className='popup-nav-link btn-login'>Settings</NavLink>}
 
             {user.id && <NavLink onClick={logout} className='popup-nav-link btn-logout'>Log out</NavLink>}
+
           </div>
           
         </div>
