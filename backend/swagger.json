@@ -1,277 +1,388 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "This is a documentation for all the endpoints used in this backend service",
-      "version": "1.0.0",
-      "title": "Linktree-clone"
-    },
-    "host": "localhost:3001",
-    "basePath": "/api",
-    "tags": [
-      {
-        "name": "link",
-        "description": "Operations about links",
-        "externalDocs": {
-          "description": "Find out more about our store",
-          "url": "http://swagger.io"
-        }
-      },
-      {
-        "name": "auth",
-        "description": "Authentication endpoints"
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a documentation for all the endpoints used in this backend service",
+    "version": "1.0.0",
+    "title": "Linktree-clone"
+  },
+  "host": "localhost:3001",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "link",
+      "description": "Operations about links",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
       }
-    ],
-    "schemes": [
-      "http"
-    ],
-    "paths": {
-      "/links": {
-        "post": {
-          "tags": [
-            "link"
-          ],
-          "summary": "Create a new link",
-          "description": "",
-          "operationId": "createLink",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "header",
-              "name": "Authorization",
-              "description": "Access token",
-              "type": "string",
-              "required": true
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Link object that needs to be created",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Link"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Link created successfully"
-            },
-            "400": {
-              "description": "Invalid input"
-            },
-            "401": {
-              "description": "Unauthorized"
+    },
+    {
+      "name": "auth",
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "settings",
+      "description": "Operations about settings"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/links": {
+      "post": {
+        "tags": ["link"],
+        "summary": "Create a new link",
+        "description": "",
+        "operationId": "createLink",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Access token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Link object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Link"
             }
           }
-        },
-        "get": {
-          "tags": [
-            "link"
-          ],
-          "summary": "Get all links",
-          "description": "Returns a list of all links",
-          "operationId": "getAllLinks",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful operation",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/LinkResponse"
-                }
-              }
-            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Link created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
-      "/auth/signup": {
-        "post": {
-          "tags": [
-            "auth"
-          ],
-          "summary": "User registration",
-          "description": "Register a new user using the provided credentials.",
-          "operationId": "userRegistration",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "User registration data",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/UserRegistration"
+      "get": {
+        "tags": ["link"],
+        "summary": "Get all links",
+        "description": "Returns a list of all links",
+        "operationId": "getAllLinks",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkResponse"
               }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "User registered successfully"
-            },
-            "400": {
-              "description": "Invalid input"
-            },
-            "409": {
-              "description": "User already exists"
-            }
-          }
-        }
-      },
-      "/auth/login": {
-        "post": {
-          "tags": [
-            "auth"
-          ],
-          "summary": "User login",
-          "description": "Authenticate a user and generatean access token.",
-          "operationId": "userLogin",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "User login credentials",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/UserLogin"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Authentication successful",
-              "schema": {
-                "$ref": "#/definitions/UserAuthentication"
-              }
-            },
-            "400": {
-              "description": "Invalid input"
-            },
-            "401": {
-              "description": "Authentication failed"
             }
           }
         }
       }
     },
-    "definitions": {
-      "Link": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
+    "/auth/signup": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "User registration",
+        "description": "Register a new user using the provided credentials.",
+        "operationId": "userRegistration",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User registration data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistration"
+            }
           }
-        },
-        "required": [
-          "title",
-          "url"
-        ]
+        ],
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "User login",
+        "description": "Authenticate a user and generatean access token.",
+        "operationId": "userLogin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User login credentials",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authentication successful",
+            "schema": {
+              "$ref": "#/definitions/UserAuthentication"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Authentication failed"
+          }
+        }
+      }
+    },
+    "/settings": {
+      "post": {
+        "tags": ["settings"],
+        "summary": "Create new settings",
+        "description": "Create new settings for UI customization",
+        "operationId": "createSettings",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Access token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Settings object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Settings created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
       },
-      "LinkResponse": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "userId": {
-            "type": "string"
-          },
-          "__v": {
-            "type": "integer"
+      "get": {
+        "tags": ["settings"],
+        "summary": "Get all Settings",
+        "description": "Returns a list of all Settings",
+        "operationId": "getAllSettings",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SettingsResponse"
+              }
+            }
           }
-        },
-        "required": [
-          "_id",
-          "title",
-          "url",
-          "userId",
-          "__v"
-        ]
-      },
-      "UserRegistration": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "email",
-          "password"
-        ]
-      },
-      "UserLogin": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "password"
-        ]
-      },
-      "UserAuthentication": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "token": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "email",
-          "token"
-        ]
+        }
       }
     }
+  },
+  "definitions": {
+    "Link": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["title", "url"]
+    },
+    "LinkResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer"
+        }
+      },
+      "required": ["_id", "title", "url", "userId", "__v"]
+    },
+    "UserRegistration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "email", "password"]
+    },
+    "UserLogin": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": ["email", "password"]
+    },
+    "UserAuthentication": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type":"string"
+            },
+            "name": {
+              "type":"string"
+            },
+            "email": {
+              "type":"string"
+            },
+            "token": {
+              "type": "string"
+            }
+            
+          }
+        }
+      },
+      "code": "string",
+
+      "required": ["id", "name", "email", "token"]
+    },
+    "Logo": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "binary"
+        },
+        "contentType": {
+          "type": "string"
+        }
+      },
+      "required": ["_id", "data", "contentType"]
+    },
+    "Settings": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subTitle": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "format": "base64"
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark"]
+        }
+      },
+      "required": [
+        "title",
+        "subTitle",
+        "backgroundColor",
+        "logo",
+        "theme",
+        "userId"
+      ]
+    },
+    "SettingsResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subTitle": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "object",
+          "logo": {
+            "$ref": "#/definitions/Logo"
+          }
+        },
+        "theme": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer"
+        }
+      },
+      "required": ["_id", "title", "url", "userId", "__v"]
+    }
   }
-  
+}
